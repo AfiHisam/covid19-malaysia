@@ -135,6 +135,10 @@ class simple_html_dom_node
 	public $tag_start = 0;
 	private $dom = null;
 
+	// My Custom Variable
+	static $type;
+	static $value;
+
 	function __construct($dom)
 	{
 		$this->dom = $dom;
@@ -150,6 +154,43 @@ class simple_html_dom_node
 	{
 		return $this->outertext();
 	}
+
+	// My Custom static function 
+
+	static function action ( $base,$country = null,$region = null ){  // Parse from URL
+
+		if ( isset( $region ) ){
+			static::$type='Region';
+			static::$value = strtoupper( preg_replace( '/%20/',' ',$region ) );
+			return "regions/{$region}";
+		}
+		if ( isset( $country ) ){
+			static::$type='Country';
+			static::$value = strtoupper( preg_replace( '/%20/',' ',$country ) );
+			return "cases/{$country}";
+		}
+		return null;
+
+	}
+
+	static function data( $overall_0,$overall_1,$overall_2,$overall_3 ){  // Put into array
+ 
+		$data=[
+			static::$type => static::$value,
+			"Date" => "$overall_0",
+			"Confirmed" => "$overall_1",
+			"Death" => "$overall_2",
+			"Recovered" => null
+		];
+
+		if( static::$type == 'Country' ){
+			$data["Recovered"] = $overall_3;
+		}
+
+		return $data;
+	}
+
+	// End My Static Function
 
 	function clear()
 	{
