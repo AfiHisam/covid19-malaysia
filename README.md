@@ -10,8 +10,8 @@ Htaccess responsible for redirecting every single request in the web to the `ind
 URL is being parse in the `index.php` file. `{country}` can be change based on the country that you're desire to pull the data.  `{region}` also can be change based on the region of the country that you're desire to pull the data.
 
 ```php
-http://afimaster.com/{country}
-http://afimaster.com/{country}/{region}
+https://weburl/{country}
+https://weburl/{country}/{region}
 ```
 
 * Country List  : https://covid19.ascube.net/cases/

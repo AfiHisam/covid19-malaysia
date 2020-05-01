@@ -4,6 +4,8 @@ include('simple_html_dom.php');
 
   $url = explode( '/',trim( $_SERVER['REQUEST_URI'],'//' ) ); // Parse URL
 
+  var_dump($url);
+
   $data = array();
 
   if ( isset( $url[1] ) || isset( $url[2] ) ){ // if URL = /{country}/{region} 
@@ -24,11 +26,11 @@ include('simple_html_dom.php');
 	"overall" => simple_html_dom_node::data(...$data) // Put into array
 	);
 
-  }else{ // Afi Master Original Coding
+  }else{ // Default 
   
 	$html = file_get_html('https://covid19.ascube.net/cases/Malaysia');
 
-	for ($i = 0; $i<= 3; $i++){
+	for ($i = 0; $i<= 3; $i++){ 
   
 		$GLOBALS['overall_'.$i] = $html->find('table[id=vCases-table] td',$i)->plaintext;
   
